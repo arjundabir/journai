@@ -1,5 +1,6 @@
 "use client";
 
+import MapDisplay from "@/components/game/MapDisplay";
 import { useCompletion } from "ai/react";
 
 export default function Completion() {
@@ -13,7 +14,8 @@ export default function Completion() {
   } = useCompletion();
 
   return (
-    <div className="mx-auto w-full max-w-md py-24 flex flex-col stretch">
+    <div className="w-screen h-screen">
+      {/* <MapDisplay /> */}
       <form onSubmit={handleSubmit}>
         <label>
           Say something...
