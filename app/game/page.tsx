@@ -49,14 +49,17 @@ export default function Completion() {
     complete(
       "begin by welcoming me to journai, a way to explore the campus that you will like"
     );
+    console.log(1);
 
     const timer = setTimeout(() => {
       setDissappear(!dissapear);
     }, 8000);
 
-    const timerChats = setTimeout(() => {
-      setDissappear(!dissapear);
-      complete("give me a hint about my location");
+    const timerChats = setInterval(() => {
+      setDissappear(false);
+      complete(
+        `give me a hint about ${landmarkKey}. Say some fun facts about it or why its significant`
+      );
     }, 20000);
 
     return () => clearTimeout(timer);
