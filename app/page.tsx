@@ -31,17 +31,6 @@ export default async function Home() {
   data = data.candidates[0].content.parts[0].text;
   const jsonPart = JSON.parse(data.replace(/```json|```/g, "").trim());
 
-  let message =
-    "Find 4 locations at UCLA that match this person's personality given this data:\n\n";
-  jsonPart.forEach((item, index) => {
-    message += `${index + 1}. **Prompt**: ${item.prompt}\n   **Answer**: ${
-      item.answer
-    }\n\n`;
-  });
-  message +=
-    "Please list the four best matching locations at UCLA based on these preferences.";
-  console.log(message);
-
   return (
     <main className="container mx-auto h-dvh">
       <h1 className="text-center pt-8 text-7xl">

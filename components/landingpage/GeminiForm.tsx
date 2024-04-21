@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 interface Props {
@@ -11,6 +12,7 @@ interface Data {
 }
 
 const GeminiForm = ({ data }: Props) => {
+  const router = useRouter();
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>(
     Array(data.length).fill("")
   );
@@ -30,6 +32,7 @@ const GeminiForm = ({ data }: Props) => {
       };
     });
     console.log(mappedData);
+    router.push("/game");
   };
 
   return (
