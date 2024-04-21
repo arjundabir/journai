@@ -45,6 +45,7 @@ export default function Completion() {
   const landmarkKey = Object.keys(randomLandmark).find(
     (key) => landmarks[key] === randomLandmark
   );
+
   useEffect(() => {
     complete(
       "begin by welcoming me to journai, a way to explore the campus that you will like"
@@ -58,11 +59,14 @@ export default function Completion() {
     const timerChats = setInterval(() => {
       setDissappear(false);
       complete(
-        `give me a hint about ${landmarkKey}. Say some fun facts about it or why its significant`
+        `give some fun facts about important landmarks at UCLA but don't say what the location is. Don't include more than 140 characters.`
       );
     }, 20000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(timerChats);
+    };
   }, []);
 
   return (
