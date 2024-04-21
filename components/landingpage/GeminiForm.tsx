@@ -7,7 +7,7 @@ interface Props {
 
 interface Data {
   prompt: string;
-  answers: string[];
+  answer: string[];
 }
 
 const GeminiForm = ({ data }: Props) => {
@@ -21,7 +21,6 @@ const GeminiForm = ({ data }: Props) => {
     setSelectedAnswers(newSelectedAnswers);
   };
 
-  const [recieved_data, setData] = useState<Data[]>(data);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const mappedData = data.map((question, index) => {
@@ -30,21 +29,20 @@ const GeminiForm = ({ data }: Props) => {
         answer: selectedAnswers[index],
       };
     });
-
     console.log(mappedData);
   };
 
   return (
     <>
-      <div className="w-1/2 border-[3px] rounded-xl p-4 mx-auto text-center overflow-y-scroll">
-        <h3 className="text-2xl">Let's Get to Know you.</h3>
+      <div className="w-full h-fit md:w-1/2 border-[3px] rounded-xl p-4 mx-auto text-center">
+        <h3 className="text-2xl">Let&apos;s Get to Know you.</h3>
         <p className="text-md">Powered by Gemini 1.5 Pro</p>
         <form onSubmit={handleSubmit}>
-          {recieved_data.map((questions, index) => (
+          {data.map((questions, index) => (
             <div key={index} className="text-left form-control">
               <h3 className="text-md">{questions.prompt}</h3>
               <div className="flex flex-col">
-                {questions.answers.map((option, index_2) => (
+                {questions.answer.map((option, index_2) => (
                   <label
                     key={index_2}
                     className="label py-0 cursor-pointer justify-start gap-x-2"
@@ -67,7 +65,7 @@ const GeminiForm = ({ data }: Props) => {
               type="submit"
               className="btn btn-success text-lg text-white"
             >
-              Let's Find YOUR Adventure
+              Let&apos;s Find YOUR Adventure
             </button>
           </div>
         </form>

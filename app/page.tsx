@@ -2,7 +2,7 @@ import GeminiForm from "@/components/landingpage/GeminiForm";
 
 interface Data {
   prompt: string;
-  options: string[];
+  answers: string[];
 }
 
 export default async function Home() {
@@ -18,7 +18,7 @@ export default async function Home() {
           {
             parts: [
               {
-                text: "keep coming up with new ones. make 4 prompts to figure out a student's vibe in relation to an exploring game that explores their campus. These questions should tailor our understanding of them at the end and create a persona that we can analyze what type of adventure we should take them around campus. These should have multiple choice answers 4 of them. make the response in the json array. Don't add any extra characters that invalidate this as a json when parsing. make the objects in the array {prompt: string, answer: array}.",
+                text: "make 4 prompts to figure out a student's vibe in relation to an exploring game that explores their campus. These questions should tailor our understanding of them at the end and create a persona that we can analyze what type of adventure we should take them around campus. These should have multiple choice answers 4 of them. make the response in the json array. Don't add any extra characters that invalidate this as a json when parsing. you MUST keep the objects in the array {prompt: string, answer: array}. do not include anything else other than the array",
               },
             ],
           },
@@ -29,14 +29,12 @@ export default async function Home() {
   );
   let data = await response.json();
   data = data.candidates[0].content.parts[0].text;
-  console.log(data);
-  const jsonPart = data.replace(/```json|```/g, "").trim();
-  const newText = JSON.parse(jsonPart);
+  const jsonPart = JSON.parse(data.replace(/```json|```/g, "").trim());
 
-  console.log(newText);
+  console.log(jsonPart);
 
   return (
-    <main className="container h-screen mx-auto">
+    <main className="container mx-auto h-dvh">
       <h1 className="text-center pt-8 text-7xl">
         Journ
         <span className="bg-gradient-to-r from-blue-600 to-green-500 inline-block text-transparent bg-clip-text">
@@ -47,7 +45,7 @@ export default async function Home() {
         Campus Exploration, <span className="text-green-500">your way.</span>
       </p>
 
-      <GeminiForm data={newText} />
+      <GeminiForm data={jsonPart} />
     </main>
   );
 }
